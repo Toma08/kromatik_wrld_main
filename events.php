@@ -3,100 +3,69 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
-    
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
-
-   <!-- custom css file link  -->
-   <link rel="stylesheet" href="product card popup/css/style.css">
-
-   <!-- custom js file link  -->
-   <script src="product card popup/js/script.js" defer></script>
-   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
-    
     <title>Kromatik</title>
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    
     <style>
-        #container{
-            display: flex;
-            gap: 5px;
+        .indexPic {
+            width: 100%;
+            height: 300px; /* Állítsd be a kívánt magasságot */
+            object-fit: cover; /* A képek a teljes kártya területet kitöltik */
         }
-        .indexPic{
-            
-            
+        .card {
+            margin-bottom: 20px;
         }
     </style>
 </head>
 <body>
     <div class="page">
+        <?php include 'header.php'; ?>
 
-    
-<?php include 'header.php'; ?>
-    <?php
-// query.php
+        <h1 class="text-center mt-4 mb-5">Események</h1>
 
-// Csatlakozás az adatbázishoz
-require_once 'db2.inc.php';
+        <div class="container">
+            <div class="row row-cols-1 row-cols-md-3 g-4">
+                <?php
+                // Csatlakozás az adatbázishoz
+                require_once 'db2.inc.php';
+                $pdo = getConnection();
 
-// Kapcsolat lekérése
-$pdo = getConnection();
+                try {
+                    // SQL lekérdezés előkészítése
+                    $sql = "SELECT * FROM events";
+                    $stmt = $pdo->prepare($sql);
+                    $stmt->execute();
 
-try {
-    // SQL lekérdezés előkészítése
-    $sql = "SELECT * FROM events";
-    $stmt = $pdo->prepare($sql);
-    $stmt->execute();
+                    // Eredmények feldolgozása
+                    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                        ?>
+                        <div class="col">
+                            <div class="card">
+                                <img class="card-img-top indexPic" src="<?php echo htmlspecialchars($row['index_pic']); ?>" alt="">
+                                <div class="card-body">
+                                    <h5 class="card-title"><?php echo htmlspecialchars($row['title']); ?></h5>
+                                    <p class="card-text"><?php echo htmlspecialchars($row['location']); ?></p>
+                                    <p class="card-text"><?php echo htmlspecialchars($row['date']); ?></p>
+                                    <form method="post" action="get_event_details.php">
+                                        <input type="hidden" name="date" value="<?php echo htmlspecialchars($row['date']); ?>">
+                                        <button type="submit" name="show_details" class="btn btn-primary">Teljes esemény</button>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                        <?php
+                    }
+                } catch (PDOException $e) {
+                    echo "Hiba történt a lekérdezés során: " . $e->getMessage();
+                }
+                ?>
+            </div>
+        </div>
+    </div>
 
-    // Eredmények feldolgozása
-   /* echo "<h1>Események</h1>";
-    echo "<div id='container'>";*/
-    while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-       /*
-        echo "<div id='esemeny' class='card'>";
-        echo "<div id='' class='card-body'>";
-        echo '<img height="250" class="indexPic" src="' . htmlspecialchars($row['index_pic']) . '" alt="">';
-        echo "<p>" . htmlspecialchars($row['title']) . " " . htmlspecialchars($row['location']) . "</p>";
-        echo "<p>" . htmlspecialchars($row['date']) . "</p>";
-        echo "<p class='btn btn-primary'>Teljes esemény</p>";
-        echo "</div>";
-        echo "</div>";*/
-
-        echo "<div class='container'>";
-        echo "<div class='products-container'>";
-        echo "<div class='product' data-name='p-1'>";
-        echo"<img src='" . htmlspecialchars($row['index_pic']) . "'alt=''>";
-        echo"<h3>"  . htmlspecialchars($row['title']) . "</h3>";
-        echo "</div>";
-        echo "</div>";
-        echo "</div>";
-
-        echo'<div class="products-preview">';
-        echo'<div class="preview" data-target="p-1">';
-        echo'<i class="fas fa-times"></i>';
-        echo"<img src='" . htmlspecialchars($row['index_pic']) . "'alt=''>";
-        echo"<h3>"  . htmlspecialchars($row['title']) . "</h3>";
-        echo "<p>" . htmlspecialchars($row['description']) . "</p>";
-        echo'<div class="price">$2.00</div>';
-        echo'<div class="buttons">';
-        echo'<a href="#" class="buy">buy now</a>';
-        echo'</div>';
-        echo'</div>';
-        echo'</div>';
-        echo'';
-        echo'';
-        echo'';
-
-
-       
-    }
-     echo "</div>";
-     echo "<br>";
-
-     
-} catch (PDOException $e) {
-    echo "Hiba történt a lekérdezés során: " . $e->getMessage();
-}
-?>
-</div>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
