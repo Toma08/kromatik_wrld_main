@@ -1,0 +1,15 @@
+.login{
+    display: flex;
+    flex-direction: column;
+    color: aliceblue;
+    width: 30vh;
+    background-color:#090309 ;
+}
+.login form{
+    display: flex;
+    flex-direction: column;
+    gap: 1em;
+}
+body{
+    background-color: #222;
+}
