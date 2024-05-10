@@ -25,7 +25,6 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     if (count($users) === 1) {
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $users[0]['email'];
-        $_SESSION['role'] = $users[0]['role'];
         header('Location: index.php');
     } else {
         $login_failed = true;
@@ -53,7 +52,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
             <div class="col-md-6 offset-md-3">
                 <?php if ($login_failed) { ?>
                     <div class="alert alert-danger mt-3" role="alert">
-                        Login Failed!
+                        Rossz felhasználónév vagy jelszó!
                     </div>
                 <?php } ?>
 
@@ -61,11 +60,11 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
                 <form action="login.php" method="post">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username">
+                        <input type="text" class="form-control" id="username" name="username" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </div>
 
                     <button type="submit" class="btn btn-primary mt-3">Login</button>
