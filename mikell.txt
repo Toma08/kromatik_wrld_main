@@ -1,0 +1,8 @@
+uzenetkuldes ha bejelentkezett
+
+nethely
+
+videok
+
+emailvalidálás js-ben és szerveren
+
