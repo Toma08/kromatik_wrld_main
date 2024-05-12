@@ -17,11 +17,25 @@ if (isset($_POST['show_details'])) {
 
         // Eredmény feldolgozása
         if ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
-            echo '<p>Cím: ' . htmlspecialchars($row['title']) . '</p>';
-            echo '<p>Helyszín: ' . htmlspecialchars($row['location']) . '</p>';
-            echo '<p>Dátum: ' . htmlspecialchars($row['date']) . '</p>';
-            echo '<img src="' . htmlspecialchars($row['index_pic']) . '" alt="">';
+            echo "<!DOCTYPE html>";
+            echo "<html lang='en'>";
+            echo "<head>";
+            echo "<meta charset='UTF-8'>";
+            echo "<meta name='viewport' content='width=device-width, initial-scale=1.0'>";
+            echo "<title>Events</title>";
+            echo'<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">';
+
+            echo "<link rel='stylesheet' href='style2.css'>";
+            echo "</head>";
+            echo "<body>";
+            echo '<div class="event">';
+            echo '<img class="img-fluid" src="' . htmlspecialchars($row['index_pic']) . '" alt="">';
             echo '<p>Dátum: ' . htmlspecialchars($row['description']) . '</p>';
+            echo '<a href="events.php">Vissza</a>';
+            echo '</div>';
+            echo "</body>";
+            echo "</html>";
+            
         } else {
             echo 'Nincs ilyen esemény a megadott dátummal.';
         }
@@ -29,4 +43,3 @@ if (isset($_POST['show_details'])) {
         echo 'Hiba történt a lekérdezés során: ' . $e->getMessage();
     }
 }
-?>

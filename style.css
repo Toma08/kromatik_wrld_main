@@ -1,15 +1,33 @@
-.login{
-    display: flex;
-    flex-direction: column;
-    color: aliceblue;
-    width: 30vh;
-    background-color:#090309 ;
+.login {
+  display: flex;
+  flex-direction: column;
+  color: aliceblue;
+  width: 30vh;
+  background-color: #090309;
 }
-.login form{
-    display: flex;
-    flex-direction: column;
-    gap: 1em;
+.login form {
+  display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
-body{
-    background-color: #222;
+body {
+  background-color: #222;
+}
+
+.video-player {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.video-player video {
+  width: 100%;
+  height: auto;
+}
+
+.player {
+  aspect-ratio: 16/9;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
 }

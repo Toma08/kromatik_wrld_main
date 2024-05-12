@@ -3,11 +3,12 @@ require_once 'db.inc.php';
 
 $registration_failed = false;
 
-if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password']) && isset($_POST['role'])) {
+
+
+if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
     $username = $_POST['username'];
     $email = $_POST['email'];
     $password = $_POST['password'];
-    $role = $_POST['role'];
 
     // Adatbázis kapcsolat létrehozása
     $conn = get_connection();
@@ -21,8 +22,8 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
         $registration_failed = true;
     } else {
         // Ha nem létezik, akkor regisztrálhatunk
-        $stmt_insert = $conn->prepare("INSERT INTO users (username, email, password, role) VALUES (?, ?, SHA1(?), ?)");
-        $stmt_insert->execute([$username, $email, $password, $role]);
+        $stmt_insert = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, SHA1(?))");
+        $stmt_insert->execute([$username, $email, $password]);
         $registration_failed = false; // Regisztráció sikeres
     }
 

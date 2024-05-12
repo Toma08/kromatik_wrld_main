@@ -1,12 +1,12 @@
 <?php
 session_start();
 $dsn = "mysql:host=localhost;dbname=kromatik_wrld";
-$dbusername="root";
-$dbpassword="";
+$dbusername="kromatik_wrld";
+$dbpassword="Basszunkbe0430";
 
 $menu = array(
     'Home' => 'index.php',
-    'Users' => 'users.php',
+    'Events' => 'events.php',
     'Login' => 'login.php',
     'Register' => 'register.php',
 );
