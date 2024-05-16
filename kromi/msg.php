@@ -27,7 +27,7 @@ if (isset($_POST['message'])) {
     $conn = null;
 
     // Sikeres üzenetküldés után visszairányítjuk a felhasználót az üzenetküldő oldalra
-    header('Location: msg.php');
+    header('Location: index.php?page=msg');
     exit();
 }
 ?>
@@ -42,15 +42,7 @@ if (isset($_POST['message'])) {
     <title>Üzenet</title>
 </head>
 <body>
-<?php 
-                    
-                    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-                        include 'header2.php'; // Bejelentkezett felhasználók számára
-                    } else {
-                        include 'header.php'; // Nem bejelentkezett felhasználók számára
-                    }
 
-            ?>
     <h1>Üzenet küldés</h1>
     <form action="msg.php" method="post">
         <label for="message">Üzenet:</label><br>

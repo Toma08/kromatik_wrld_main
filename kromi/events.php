@@ -28,13 +28,7 @@
 </head>
 
 <body>
-<?php 
-                    
-                    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
-                        include 'header2.php'; // Bejelentkezett felhasználók számára
-                    } 
 
-            ?>
 
     <div class="page">
        
