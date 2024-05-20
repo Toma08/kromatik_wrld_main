@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once 'db.inc.php';
 
@@ -25,6 +26,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     if (count($users) === 1) {
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $users[0]['email'];
+        $_SESSION['loggedin'] = true;
         header('Location: index.php');
     } else {
         $login_failed = true;
@@ -46,7 +48,14 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
+
+<?php 
+                    
+                    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+                        include 'header2.php'; // Bejelentkezett felhasználók számára
+                    } 
+
+            ?>
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">

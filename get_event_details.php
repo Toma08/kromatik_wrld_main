@@ -31,7 +31,7 @@ if (isset($_POST['show_details'])) {
             echo '<div class="event">';
             echo '<img class="img-fluid" src="' . htmlspecialchars($row['index_pic']) . '" alt="">';
             echo '<p>Dátum: ' . htmlspecialchars($row['description']) . '</p>';
-            echo '<a href="events.php">Vissza</a>';
+            echo '<a href="index.php?page=events">Vissza</a>';
             echo '</div>';
             echo "</body>";
             echo "</html>";

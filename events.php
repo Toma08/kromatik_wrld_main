@@ -1,3 +1,6 @@
+<?php 
+  session_start();
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -25,8 +28,10 @@
 </head>
 
 <body>
+
+
     <div class="page">
-        <?php include 'header.php'; ?>
+       
 
         <h1 class="text-center mt-4 mb-5">Események</h1>
 
@@ -46,6 +51,7 @@
                     // Eredmények feldolgozása
                     while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 ?>
+                
                         <div class="col">
                             <div class="card ">
                                 <img class="card-img-top indexPic" src="<?php echo htmlspecialchars($row['index_pic']); ?>" alt="">

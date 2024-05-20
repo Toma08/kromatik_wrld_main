@@ -1,23 +1,40 @@
 .event {
-    margin-left: auto;
-    margin-right:auto ;
-    border: 1px solid black;
-    border-radius: 15px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    width: 50vh;
-    gap: 5px;
-  }
-.event img{
-    border-radius: 15px;
-    width: 50vh;
-   margin: 0px auto;
+  margin-left: auto;
+  margin-right: auto;
+  border: 1px solid black;
+  border-radius: 15px;
+  box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px,
+    rgba(0, 0, 0, 0.3) 0px 30px 60px -30px,
+    rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  width: 50vh;
+  gap: 5px;
 }
-.event a{
-    color: inherit;
-    text-align: center;
-    text-decoration: none;
+.event img {
+  border-radius: 15px;
+  width: 50vh;
+  margin: 0px auto;
 }
-  
+.event a {
+  color: inherit;
+  text-align: center;
+  text-decoration: none;
+}
+.msg {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  border: 1px solid;
+  width: 100%;
+  max-width: 600px;
+  border-radius: 15px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 2em;
+}
+#message {
+  width: 100%;
+  max-width: 400px;
+}

@@ -1,9 +1,9 @@
 <?php
+session_start();
 require_once 'db.inc.php';
 
 $registration_failed = false;
-
-
+$registration_successful = false; // új változó a sikeres regisztráció jelzésére
 
 if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['password'])) {
     $username = $_POST['username'];
@@ -25,6 +25,7 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
         $stmt_insert = $conn->prepare("INSERT INTO users (username, email, password) VALUES (?, ?, SHA1(?))");
         $stmt_insert->execute([$username, $email, $password]);
         $registration_failed = false; // Regisztráció sikeres
+        $registration_successful = true; // beállítjuk a sikeres regisztráció változót
     }
 
     $conn = null; // Adatbázis kapcsolat bezárása
@@ -42,13 +43,32 @@ if (isset($_POST['username']) && isset($_POST['email']) && isset($_POST['passwor
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
+<?php 
+                    
+                    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+                        include 'header2.php'; // Bejelentkezett felhasználók számára
+                    }
+                    if($registration_failed){
+                        include 'header.php';
+                    }
+                    if($registration_successful){
+                        include 'header.php';
+                    }
+
+            ?>
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <?php if ($registration_failed) { ?>
                     <div class="alert alert-danger mt-3" role="alert">
                         A felhasznónév vagy az email már foglalt.
+                    </div>
+                <?php } ?>
+
+                <?php if ($registration_successful) { ?>
+                   
+                    <div class="alert alert-success mt-3" role="alert">
+                        Sikeres regisztráció!
                     </div>
                 <?php } ?>
 

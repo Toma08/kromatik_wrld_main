@@ -2,14 +2,7 @@
 session_start();
 $dsn = "mysql:host=localhost;dbname=kromatik_wrld";
 $dbusername = "kromatik_wrld";
-$dbpassword = "Basszunkbe0430";
-
-$menu = array(
-    'Home' => 'index.php',
-    'Events' => 'events.php',
-    'Login' => 'login.php',
-    'Register' => 'register.php',
-);
+$dbpassword = "Ujjelszo69";
 
 try {
     $pdo = new PDO($dsn, $dbusername, $dbpassword);
