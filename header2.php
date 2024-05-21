@@ -5,6 +5,9 @@ $page = isset($_GET['page']) ? $_GET['page'] : 'index';
 // Oldalak nevei tömbben
 include 'db.inc.php';
 
+// Felhasználónév ellenőrzése 
+$loggedInUsername = isset($_SESSION['username']) ? $_SESSION['username'] : '';
+
 // Navbar létrehozása
 echo '<nav class="navbar navbar-expand-lg bg-body-tertiary">';
 echo '  <div class="container-fluid">';
@@ -14,11 +17,17 @@ echo '      <span class="navbar-toggler-icon"></span>';
 echo '    </button>';
 echo '    <div class="collapse navbar-collapse" id="navbarNav">';
 echo '      <ul class="navbar-nav">';
-foreach ($pages as $key => $value) {
-  $activeClass = ($page == $key) ? 'active' : '';
-  echo '        <li class="nav-item">';
-  echo "          <a class=\"nav-link $activeClass\" aria-current=\"page\" href=\"index.php?page=$key\">$value</a>";
-  echo '        </li>';
+foreach ($pages2 as $key => $value) {
+    $activeClass = ($page == $key) ? 'active' : '';
+    echo '        <li class="nav-item">';
+    echo "          <a class=\"nav-link $activeClass\" aria-current=\"page\" href=\"index.php?page=$key\">$value</a>";
+    echo '        </li>';
+}
+// Bejelentkezett felhasználó neve a header-ben
+if (!empty($loggedInUsername)) {
+    echo '        <li class="nav-item">';
+    echo "          <span class=\"nav-link\">Bejelentkezett: $loggedInUsername</span>";
+    echo '        </li>';
 }
 echo '      </ul>';
 echo '    </div>';

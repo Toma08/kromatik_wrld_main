@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 require_once 'db.inc.php';
 
@@ -25,7 +26,7 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
     if (count($users) === 1) {
         $_SESSION['username'] = $username;
         $_SESSION['email'] = $users[0]['email'];
-        $_SESSION['role'] = $users[0]['role'];
+        $_SESSION['loggedin'] = true;
         header('Location: index.php');
     } else {
         $login_failed = true;
@@ -47,25 +48,32 @@ if (isset($_POST['username']) && isset($_POST['password'])) {
 </head>
 
 <body>
-    <?php include 'header.php'; ?>
+
+    <?php
+
+    if (isset($_SESSION['loggedin']) && $_SESSION['loggedin'] === true) {
+        include 'header2.php'; // Bejelentkezett felhasználók számára
+    }
+
+    ?>
     <div class="container">
         <div class="row">
             <div class="col-md-6 offset-md-3">
                 <?php if ($login_failed) { ?>
                     <div class="alert alert-danger mt-3" role="alert">
-                        Login Failed!
+                        Rossz felhasználónév vagy jelszó!
                     </div>
                 <?php } ?>
 
                 <h1>Login</h1>
-                <form action="login.php" method="post">
+                <form action="index.php?page=login" method="post">
                     <div class="form-group">
                         <label for="username">Username</label>
-                        <input type="text" class="form-control" id="username" name="username">
+                        <input type="text" class="form-control" id="username" name="username" required>
                     </div>
                     <div class="form-group">
                         <label for="password">Password</label>
-                        <input type="password" class="form-control" id="password" name="password">
+                        <input type="password" class="form-control" id="password" name="password" required>
                     </div>
 
                     <button type="submit" class="btn btn-primary mt-3">Login</button>
